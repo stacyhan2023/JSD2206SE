@@ -10,6 +10,11 @@ import java.nio.charset.StandardCharsets;
 
 /**聊天室服务端*/
 public class Server {
+    /**
+     * 运行在服务端的ServerSocket,主要作用有2个
+     * 1：开启服务端口，客户端就是通过这个端口与服务端建立联系（ServerSocket构造方法）
+     * 2:监听该端口，一旦一个客户端连接时，就会返回一个socket实例与其通讯（accept方法的作用）*/
+
     private ServerSocket serverSocket;
 
     public Server(){

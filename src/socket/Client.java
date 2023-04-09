@@ -2,6 +2,7 @@ package socket;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public class Client {
     private Socket socket; //套接字，插座
@@ -31,7 +32,16 @@ public class Client {
             BufferedWriter bw =new BufferedWriter(osw);
             //高级流pw按行写
             PrintWriter pw= new PrintWriter(bw,true);
-            pw.println("你好服务端！");
+
+            Scanner scanner=new Scanner(System.in);
+            while(true){
+                String line= scanner.nextLine();
+                if("exit".equals(line)){
+                    break;
+                }
+                pw.println(line);
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
