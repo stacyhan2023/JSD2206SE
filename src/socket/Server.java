@@ -30,19 +30,22 @@ public class Server {
 
     public void start(){//完成交互动作
         try {
-            System.out.println("等待客户端链接。。。");
-            Socket socket= serverSocket.accept();//阻塞方法
-            System.out.println("一个客户端连接了！");
-
-            //通过刚接受连接的socket，获取输入流来读取该客户端发送过来的消息
-            InputStream in =socket.getInputStream();
-            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-            BufferedReader br= new BufferedReader(isr);
-
-            String line=br.readLine();
-            System.out.println("客户端说；"+line);
+            while(true) {
+                System.out.println("等待客户端链接。。。");
+                Socket socket = serverSocket.accept();//阻塞方法
+                System.out.println("一个客户端连接了！");
 
 
+                //通过刚接受连接的socket，获取输入流来读取该客户端发送过来的消息
+                InputStream in = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(isr);
+
+                String line;
+                while ((line = br.readLine()) != null) {
+                    System.out.println("客户端说：" + line);
+                }
+            }
 
 
         } catch (IOException e) {
