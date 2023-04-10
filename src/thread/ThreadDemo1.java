@@ -1,4 +1,5 @@
 package thread;
+<<<<<<< HEAD
 /**多线程
  * 1继承thread
  * 2重写run方法*/
@@ -34,3 +35,11 @@ class MyThread2 extends Thread {
 }
 
 
+=======
+/**多线程*/
+public class ThreadDemo1 {
+    public static void main(String[] args) {
+
+    }
+}
+>>>>>>> origin/master
