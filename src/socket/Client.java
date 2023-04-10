@@ -27,7 +27,7 @@ public class Client {
             //网络流低级流
             OutputStream out = socket.getOutputStream();
             //转换流，字符转成字节
-            OutputStreamWriter osw=new OutputStreamWriter(out, StandardCharsets.UTF_8);
+            OutputStreamWriter osw=new OutputStreamWriter(out,StandardCharsets.UTF_8);
             //缓冲流
             BufferedWriter bw =new BufferedWriter(osw);
             //高级流pw按行写
@@ -35,16 +35,23 @@ public class Client {
 
             Scanner scanner=new Scanner(System.in);
             while(true){
-                String line= scanner.nextLine();
+                String line= scanner.nextLine();//阻塞
                 if("exit".equals(line)){
                     break;
                 }
                 pw.println(line);
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
+        }finally{
+            try {
+                /**socket的 close方法里封装了与服务器4次挥手操作，与服务器断开连接
+                 * 并且该close还会在内部将通过socket获取的输入流与输出流关闭
+                 * */
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
