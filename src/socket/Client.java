@@ -22,6 +22,13 @@ public class Client {
     }
 
     public void start(){
+        //将读取来自服务器消息的线程启动起来
+        ServerHandle serveHandler = new ServerHandle();
+        Thread t=new Thread(serveHandler);
+        t.setDaemon(true);
+        t.start();
+
+
         //客户端向服务端发送数据，则需要使用socket获取输出流，
         try {
             //网络流低级流
@@ -32,6 +39,7 @@ public class Client {
             BufferedWriter bw =new BufferedWriter(osw);
             //高级流pw按行写
             PrintWriter pw= new PrintWriter(bw,true);
+
 
             Scanner scanner=new Scanner(System.in);
             while(true){
@@ -58,9 +66,29 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        Client client =new Client();
+        Client client = new Client();
         client.start();
 
     }
 
+    private class ServerHandle implements  Runnable{
+        public void run() {
+            try {
+            //通过socket获取输入流，用于读取服务端发送过来的消息
+            InputStream in = socket.getInputStream();
+            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(isr);
+
+            String line;
+
+                while((line=br.readLine())!=null){
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }
+
