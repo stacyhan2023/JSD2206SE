@@ -13,6 +13,7 @@ public class Person {
         this.age = age;
     }
 
+    @AutoRunMethod
     public  void sayHello(){
         System.out.println(name+"说：hello！");
     }
@@ -20,6 +21,8 @@ public class Person {
     public void watchTV(){
         System.out.println(name+": 正在看电视");
     }
+
+    @AutoRunMethod
     public  void sing(){
         System.out.println(name+"正在唱歌");
     }
@@ -27,6 +30,7 @@ public class Person {
         System.out.println(name+"正在打游戏");
     }
 
+    @AutoRunMethod
     public  void eat(){
         System.out.println(name+"正在干饭");
     }
