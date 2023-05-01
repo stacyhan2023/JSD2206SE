@@ -1,9 +1,12 @@
 package reflect;
 
+@AutoRunClass
 public class Person {
+//    @AutoRunClass只给最近的属性加
     private String name="stacy";
     private int age=18;
     public Person(){}
+
 
     public Person(String name, int age) {
         this.name = name;
