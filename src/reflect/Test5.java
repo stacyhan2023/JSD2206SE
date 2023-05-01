@@ -3,12 +3,13 @@ package reflect;
 import java.io.File;
 import java.lang.reflect.Method;
 
-/**自动调用与test4在同一个包中被@autorunclass标注的类中
- * 被@automethod标注的方法，并将该对象输出*/
-public class Test4 {
+/**自动调用与test5在同一个包中被@autorunclass标注的类中被@automethod
+ * 标注的方法指定次数，
+ * 次数由参数决定*/
+public class Test5 {
     public static void main(String[] args) throws Exception {
         File dir = new File(
-                Test4.class.getResource(".").toURI()//定位test2所在的目录（包）固定模式
+                Test5.class.getResource(".").toURI()//定位test5所在的目录（包）固定模式
         );
         System.out.println(dir);
         //获取该目录中所有。class文件
@@ -32,8 +33,13 @@ public class Test4 {
                 Method[] methods=cls.getDeclaredMethods();
                 for(Method method:methods){
                     if(method.isAnnotationPresent(AutoRunMethod.class)){
-                        System.out.println("自动调用："+method.getName()+"()");
-                        method.invoke(obj);
+                      AutoRunMethod arm=method.getAnnotation(AutoRunMethod.class);
+                      int num=arm.value();
+                        System.out.println("自动调用"+method.getName()+"()"+num+"次");
+                       for(int i=0;i<num;i++){
+                           method.invoke(obj);
+
+                       }
                     }
                 }
 
